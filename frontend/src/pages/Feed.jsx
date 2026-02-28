@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getPlayers, likePlayer } from "../api";
+import { getPlayers } from "../api";
+import PlayerCard from "../components/PlayerCard";
 
 export default function Feed() {
   const [players, setPlayers] = useState([]);
@@ -10,20 +11,10 @@ export default function Feed() {
 
   return (
     <div>
+      <h2>🔥 Top Talent</h2>
+
       {players.map(p => (
-        <div key={p.id} style={{background:"#fff", margin:10, padding:10}}>
-
-          <h3>{p.name}</h3>
-
-          <video src={p.video_url} controls width="100%" />
-
-          <p>⚽ {p.goals} 🎯 {p.assists}</p>
-          <p>Score: {p.score}</p>
-
-          <button onClick={() => likePlayer(p.id)}>
-            ❤️ {p.likes}
-          </button>
-        </div>
+        <PlayerCard key={p.id} player={p} />
       ))}
     </div>
   );
